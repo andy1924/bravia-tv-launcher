@@ -33,4 +33,4 @@ The theme in `theme/config.json` controls dock order, visible apps, and focus se
 
 Start with [the contribution guide](CONTRIBUTING.md). Documentation, offline tooling, and device compatibility reports are welcome.
 
-This project adapts [CleanYourTV](https://github.com/Gathin23/cleanyourtv) by Gathin. The source retains the upstream MIT license and bundled icon and font notices.
+See [LICENSE](LICENSE) for the source license. Icon and font notices are bundled with the project.
