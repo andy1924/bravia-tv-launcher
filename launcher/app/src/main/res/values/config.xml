@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+
+
+    <string-array name="settings_fallback_components" translatable="false">
+        <item>com.xiaomi.mitv.settings/com.xiaomi.mitv.settings.entry.MainActivity</item>
+        <item>com.tcl.settings/com.tcl.settings.ui.MainActivity</item>
+        <item>com.amazon.tv.launcher/com.amazon.tv.launcher.ui.MainSettingsActivity</item>
+    </string-array>
+
+
+    <string-array name="dock_apps">
+        <item>com.google.android.youtube.tv</item>
+        <item>com.netflix.ninja</item>
+        <item>com.amazon.amazonvideo.livingroom</item>
+        <item>in.startv.hotstar</item>
+    </string-array>
+
+    <bool name="fill_dock">false</bool>
+
+
+    <string-array name="hidden_apps">
+        <item>com.android.tv</item>
+        <item>com.mitv.gallery</item>
+    </string-array>
+
+
+    <string name="live_tv_package" translatable="false">com.android.tv</string>
+
+
+    <bool name="boot_to_live_tv">false</bool>
+
+
+    <bool name="open_on_start_choice">false</bool>
+
+    <bool name="open_on_start_on_wake">false</bool>
+
+
+    <integer name="open_on_start_network_wait">0</integer>
+
+
+    <string name="live_tv_action" translatable="false" />
+
+
+    <string name="live_tv_input_id" translatable="false" />
+
+
+    <string-array name="launch_actions">
+    </string-array>
+
+
+    <string-array name="app_labels">
+    </string-array>
+
+    <string-array name="app_banners">
+        <item>com.netflix.ninja=banner_netflix</item>
+        <item>com.google.android.youtube.tv=banner_youtube</item>
+        <item>com.apple.atve.androidtv.appletv=banner_apple_tv</item>
+    </string-array>
+
+
+    <string name="source_panel_service" translatable="false" />
+    <string name="source_panel_action" translatable="false" />
+
+    <string name="source_panel_extra" translatable="false" />
+
+
+    <bool name="coocaa_sources">false</bool>
+
+
+    <string name="input_action" translatable="false" />
+
+    <string name="input_uri_scheme" translatable="false" />
+
+
+    <bool name="key_filter">false</bool>
+
+
+    <bool name="gamepad_passthrough">false</bool>
+
+
+    <bool name="consume_volume_keys">false</bool>
+
+
+    <bool name="home_ignore_channel_keys">false</bool>
+
+
+    <string-array name="input_sources" translatable="false">
+    </string-array>
+
+
+    <integer-array name="settings_key_scancodes">
+    </integer-array>
+
+    <integer-array name="settings_key_keycodes">
+    </integer-array>
+
+    <bool name="settings_key_panel">false</bool>
+
+    <bool name="settings_key_clear_task">false</bool>
+
+
+    <bool name="restore_key_services">true</bool>
+
+
+    <integer-array name="input_key_keycodes">
+    </integer-array>
+
+    <bool name="handle_view_inputs">false</bool>
+
+    <string-array name="app_keys" translatable="false">
+    </string-array>
+
+
+    <string name="stock_home_redirect" translatable="false">com.google.android.apps.tv.launcherx</string>
+
+
+    <bool name="power_on_home">false</bool>
+
+    <bool name="power_on_home_always">false</bool>
+
+
+    <bool name="home_long_press_home">false</bool>
+
+
+    <bool name="shamsi_date">false</bool>
+
+    <bool name="lunar_date">false</bool>
+
+    <bool name="date_below_clock">true</bool>
+
+    <string name="locale" translatable="false" />
+
+
+    <string name="greeting_name" translatable="false" />
+
+    <bool name="show_greeting">false</bool>
+
+    <bool name="header_white">false</bool>
+
+    <string name="vpn_app" translatable="false" />
+
+    <bool name="vpn_pill">false</bool>
+
+    <bool name="dock_row">true</bool>
+
+    <bool name="top_menu">false</bool>
+
+    <bool name="launcher_settings_button">false</bool>
+
+    <bool name="dock_glass">true</bool>
+
+    <bool name="dock_band">true</bool>
+
+    <bool name="single_row">false</bool>
+
+    <bool name="dock_band_all">false</bool>
+
+    <bool name="dock_even_padding">true</bool>
+
+    <bool name="reorder_button">false</bool>
+
+    <bool name="icon_only_buttons">true</bool>
+
+    <bool name="icon_only_inputs">true</bool>
+
+    <bool name="icon_only_vpn">false</bool>
+
+    <string name="clock_format" translatable="false">system</string>
+
+    <bool name="wifi_status_color">false</bool>
+
+    <bool name="wifi_status_warnings">false</bool>
+
+    <bool name="library_button">false</bool>
+
+    <bool name="show_library_pill">true</bool>
+
+    <integer name="wifi_label_width">0</integer>
+
+
+    <bool name="show_network_pill">true</bool>
+
+    <string-array name="top_bar_apps" translatable="false">
+    </string-array>
+
+    <bool name="show_inputs_pill">true</bool>
+
+    <bool name="inputs_connected_only">false</bool>
+
+    <bool name="inputs_cec_state_only">false</bool>
+
+    <bool name="always_show_names">false</bool>
+
+    <bool name="wallpaper_true_color">true</bool>
+
+    <bool name="wallpaper_captions">false</bool>
+
+    <string name="wallpaper_moods" translatable="false" />
+
+    <bool name="tile_menu">true</bool>
+
+
+    <integer name="rows_below_dock">0</integer>
+
+
+    <bool name="dock_title">false</bool>
+
+
+    <integer name="columns">5</integer>
+
+
+    <bool name="animations">true</bool>
+    <bool name="advanced_effects">false</bool>
+
+
+    <bool name="show_home_settings_shortcut">false</bool>
+
+
+    <bool name="app_library">false</bool>
+
+    <bool name="uniform_tiles">false</bool>
+
+    <bool name="app_library_selection">false</bool>
+
+    <bool name="library_ok_opens">false</bool>
+
+
+    <string-array name="library_apps" translatable="false">
+    </string-array>
+
+
+    <string-array name="library_excluded_apps" translatable="false">
+    </string-array>
+
+
+    <bool name="module_cards">true</bool>
+
+
+    <bool name="reduced_motion">false</bool>
+
+
+    <bool name="focus_overshoot">false</bool>
+
+
+    <bool name="show_stats">false</bool>
+
+
+    <string name="game_day" translatable="false" />
+
+
+    <integer name="sky_intensity">0</integer>
+
+    <string name="latitude" translatable="false" />
+    <string name="longitude" translatable="false" />
+
+
+    <bool name="cinematic_home">false</bool>
+
+    <bool name="cinematic_dots">false</bool>
+
+    <bool name="cinematic_white_focus">true</bool>
+
+    <integer name="cinematic_scrim">20</integer>
+    <integer name="cinematic_art">0</integer>
+
+
+    <bool name="ambient_glow">false</bool>
+
+    <bool name="glow_snap">false</bool>
+
+    <bool name="app_glow">false</bool>
+
+    <bool name="fade_rows">false</bool>
+
+    <integer name="home_idle_clock_minutes">5</integer>
+
+    <bool name="back_opens_clock">false</bool>
+
+    <bool name="clock_wallpaper">false</bool>
+
+    <integer name="clock_wallpaper_dim">35</integer>
+
+    <bool name="clock_glow">true</bool>
+
+    <string name="glow_style" translatable="false">radial</string>
+
+    <string name="glass_style" translatable="false">glass</string>
+
+
+    <string-array name="icon_tiles" translatable="false">
+    </string-array>
+</resources>

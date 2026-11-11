@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="launch_hint">Press OK to open</string>
+    <string name="navigation_hint">&#8593; Controls   &#183;   OK Open   &#183;   Hold OK Options</string>
+    <string name="clock_button">Clock</string>
+</resources>
