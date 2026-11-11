@@ -2,7 +2,18 @@
 
 A custom Android TV launcher for Sony BRAVIA and Google TV, with a tvOS-inspired five-app dock, Liquid Glass-inspired focus motion, and a StandBy-style clock screensaver. Navigate with a D-pad or phone remote. The interface uses Inter typography, icon-only controls, and a procedural wallpaper.
 
-Built in Java for Android TV. Developed on a Sony BRAVIA VU3 running Android 14. The latest visual revision passed local tests and lint and is awaiting device verification. Other Android TV and Google TV models need compatibility testing.
+![Five-app dock on a Sony BRAVIA VU3](docs/bravia-vu3-home.png)
+
+*Captured on a Sony BRAVIA VU3 with the earlier on-device build.*
+
+[Build from source](#build-from-source) · [Device setup](#device-setup) · [Good first issues](https://github.com/andy1924/bravia-tv-launcher/contribute)
+
+## Compatibility
+
+| Device | Android | Verification |
+| --- | --- | --- |
+| Sony BRAVIA VU3 | 14 | Earlier build verified on TV for Home navigation, restart, and clock. The redesigned focus animation and icon-only controls passed local build checks and await TV testing. |
+| Other Sony BRAVIA, Android TV, and Google TV devices | Varies | Device reports welcome. The included Home setup targets the VU3. |
 
 ## Build from source
 
