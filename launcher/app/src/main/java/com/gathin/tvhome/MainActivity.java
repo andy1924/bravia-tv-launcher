@@ -145,6 +145,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private RecyclerView grid;
     private FrameLayout root;
     private WallpaperPlayer wallpaperPlayer;
+    private HomeWeather homeWeather;
     private GlassView glass;
     private View ambient;
     private TextView heroName;
@@ -545,8 +546,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         clockRefresh = new ClockRefresh(clockBlock);
         greetingColor = greeting.getCurrentTextColor();
         if (!cfg.showGreeting) greeting.setVisibility(View.GONE);
+        boolean scenicClock = cfg.scenicClock && cfg.dockRow && cfg.rowsBelowDock == 0
+                && cfg.raceCalendar.isEmpty() && cfg.gameDay.isEmpty()
+                && !getResources().getBoolean(R.bool.rtl_menu_bar);
         // Keep the other header layouts as designed: their extra lines change the block's centre.
-        if (!cfg.showGreeting && !cfg.dateBelowClock && !cfg.shamsiDate && !cfg.lunarDate
+        if (!scenicClock && !cfg.showGreeting && !cfg.dateBelowClock && !cfg.shamsiDate && !cfg.lunarDate
                 && !cfg.topMenu && !getResources().getBoolean(R.bool.rtl_menu_bar)) {
             centerCompactHeader();
         }
@@ -593,10 +597,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         lunarOffset = Lunar.offsetFor(cfg.lunarUtcOffset, Locale.getDefault());
         if (lunar) lunarDate.setVisibility(View.VISIBLE);
         greetingName = cfg.greetingName;
-        if (cfg.dateBelowClock) moveDateBelowClock();
-        if (cfg.dateBelowClock && cfg.iconOnlyButtons && !cfg.topMenu
-                && !getResources().getBoolean(R.bool.rtl_menu_bar)) {
-            alignDateBelowIconsWithClock();
+        if (scenicClock) {
+            moveDateToOwnLine(true);
+        } else if (cfg.dateBelowClock) {
+            moveDateToOwnLine(false);
+            if (cfg.iconOnlyButtons && !cfg.topMenu && !getResources().getBoolean(R.bool.rtl_menu_bar)) {
+                alignDateBelowIconsWithClock();
+            }
         }
         if (shamsi) {
             shamsiDate.setVisibility(View.VISIBLE);
@@ -881,6 +888,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             makeIconOnly((TextView) btnLibraryTop);
         }
         if (cfg.iconOnlyInputs) makeIconOnly((TextView) btnInputs);
+        if (scenicClock) {
+            layoutScenicHeader(cfg);
+            if (Math.abs(cfg.weatherLatitude) <= 90 && Math.abs(cfg.weatherLongitude) <= 180) {
+                homeWeather = new HomeWeather(findViewById(R.id.homeWeather),
+                        cfg.weatherLatitude, cfg.weatherLongitude);
+            }
+        }
         iconOnlyVpn = vpnPill && cfg.iconOnlyVpn;
         if (iconOnlyVpn) {
             vpnPlainBackground = btnVpn.getBackground().getConstantState();
@@ -1099,6 +1113,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
         restartIdleClock();
         promptsPaused = false;
+        if (homeWeather != null) homeWeather.start();
         if (grid.getAdapter() == null) grid.setAdapter(adapter);   // dropped by onTrimMemory
         switch (tileRefresh.onResume(packagesChangedSinceRebuild())) {
             case REBUILD:
@@ -1308,6 +1323,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         root.removeCallbacks(showIdleClock);
         endReorder();   // Home or another app while reordering keeps the order so far
         wallpaperPlayer.stop();
+        if (homeWeather != null) homeWeather.stop();
         stopAmbientAnimation();
         hero.animate().cancel();
         ambient.animate().cancel();
@@ -2486,7 +2502,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      * date_below_clock: the date column moves to its own line under the clock, in the vertical LinearLayout that holds
      * the clock's row, and the line between them goes. In Hebrew (rtl_menu_bar) the date and the clock's row sit right.
      */
-    private void moveDateBelowClock() {
+    private void moveDateToOwnLine(boolean aboveClock) {
         View column = (View) findViewById(R.id.date).getParent();
         View clockRow = (View) findViewById(R.id.clock).getParent();
         LinearLayout clockColumn = (LinearLayout) clockRow.getParent();
@@ -2495,13 +2511,18 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // Its own width, not the column's: in Hebrew the column is only as wide as the clock.
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.topMargin = Math.round(4 * density);
+        if (aboveClock) {
+            lp.bottomMargin = Math.round(4 * density);
+            lp.gravity = Gravity.CENTER_HORIZONTAL;
+        } else {
+            lp.topMargin = Math.round(4 * density);
+        }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Date and clock flush right; the greeting stays left and follows the clock by translation.
             lp.gravity = Gravity.RIGHT;
             ((LinearLayout.LayoutParams) clockRow.getLayoutParams()).gravity = Gravity.RIGHT;
         }
-        clockColumn.addView(column, clockColumn.indexOfChild(clockRow) + 1, lp);
+        clockColumn.addView(column, clockColumn.indexOfChild(clockRow) + (aboveClock ? 0 : 1), lp);
         // The column now wraps its texts, so they must wrap too: a match_parent TextView does not ask for a new
         // layout when its text gets longer, and the column kept the width of the day before ("TUESDAY 27 OCTOB…").
         ViewGroup texts = (ViewGroup) column;
@@ -2513,6 +2534,44 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             textLp.gravity = ((TextView) text).getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK;
             text.setLayoutParams(textLp);
         }
+    }
+
+    private void layoutScenicHeader(Config cfg) {
+        LinearLayout clock = (LinearLayout) clockBlock;
+        RelativeLayout.LayoutParams clockParams = (RelativeLayout.LayoutParams) clock.getLayoutParams();
+        clockParams.removeRule(RelativeLayout.ALIGN_PARENT_START);
+        clockParams.removeRule(RelativeLayout.START_OF);
+        clockParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        clockParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        clockParams.setMarginEnd(0);
+        clockParams.topMargin = Math.round(20 * density);
+        clock.setLayoutParams(clockParams);
+        clock.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        ScenicTextClock time = findViewById(R.id.clock);
+        LinearLayout timeRow = (LinearLayout) time.getParent();
+        timeRow.setGravity(Gravity.CENTER_HORIZONTAL);
+        float clockSize = Math.max(38f, Math.min(168f,
+                getResources().getConfiguration().screenHeightDp * 0.31f));
+        time.setTextSize(clockSize);
+        time.setFontFeatureSettings("tnum");
+        time.setTextScaleX(.84f);
+        time.setFontVariationSettings("'wght' 440");
+        time.setScene(root, cfg.wallpaperEnabled && cfg.wallpapers.size() == 1 ? cfg.wallpapers.get(0) : null);
+        time.setTextColor(0xF5FFFFFF);
+        time.setShadowLayer(5 * density, 0, density, 0x33000000);
+        TextView date = findViewById(R.id.date);
+        date.setTextSize(15f);
+        date.setTextColor(0xE6FFFFFF);
+        date.setShadowLayer(4 * density, 0, density, 0x99000000);
+
+        View buttons = findViewById(R.id.topButtons);
+        RelativeLayout.LayoutParams buttonParams = (RelativeLayout.LayoutParams) buttons.getLayoutParams();
+        buttonParams.removeRule(RelativeLayout.ALIGN_BOTTOM);
+        buttonParams.removeRule(RelativeLayout.ALIGN_TOP);
+        buttonParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonParams.bottomMargin = 0;
+        buttons.setLayoutParams(buttonParams);
     }
 
     /** Centre the one-row header when the greeting and extra date lines are absent (#2265). */
