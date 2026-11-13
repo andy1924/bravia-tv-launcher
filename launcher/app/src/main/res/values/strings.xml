@@ -158,4 +158,14 @@
     <string name="clock_format_system">System</string>
     <string name="clock_format_12">12-hour</string>
     <string name="clock_format_24">24-hour</string>
+    <string name="home_weather">%1$d°C · %2$s</string>
+    <string name="weather_sunny">Sunny</string>
+    <string name="weather_clear">Clear</string>
+    <string name="weather_partly_cloudy">Partly cloudy</string>
+    <string name="weather_cloudy">Cloudy</string>
+    <string name="weather_fog">Fog</string>
+    <string name="weather_rain">Rain</string>
+    <string name="weather_snow">Snow</string>
+    <string name="weather_thunderstorms">Thunderstorms</string>
+    <string name="weather_conditions_unknown">Conditions unavailable</string>
 </resources>

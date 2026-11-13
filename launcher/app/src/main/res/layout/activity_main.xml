@@ -55,7 +55,7 @@
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="true">
 
-                    <TextClock android:id="@+id/clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:format12Hour="h:mm" android:format24Hour="HH:mm" android:textColor="#FFFFFFFF" android:textSize="38sp" android:fontFamily="@string/font_light" android:letterSpacing="-0.04" android:includeFontPadding="false" />
+                    <com.gathin.tvhome.ScenicTextClock android:id="@+id/clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:format12Hour="h:mm" android:format24Hour="HH:mm" android:textColor="#FFFFFFFF" android:textSize="38sp" android:fontFamily="@string/font_light" android:letterSpacing="-0.04" android:includeFontPadding="false" />
 
                     <TextClock android:id="@+id/ampm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:layout_gravity="bottom" android:layout_marginBottom="8dp" android:format12Hour="a" android:format24Hour="" android:textColor="#B3FFFFFF" android:textSize="15sp" android:fontFamily="@string/font_medium" android:letterSpacing="0.08" android:textAllCaps="true" />
 
@@ -101,6 +101,22 @@
         </FrameLayout>
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/homeWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_gravity="top|left"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="26dp"
+        android:gravity="center_vertical"
+        android:fontFamily="@string/font_medium"
+        android:singleLine="true"
+        android:textColor="#E6FFFFFF"
+        android:textSize="15sp"
+        android:shadowColor="#99000000"
+        android:shadowRadius="4"
+        android:visibility="gone" />
 
     <com.gathin.tvhome.GlassView android:id="@+id/glass" android:layout_width="10dp" android:layout_height="10dp" android:alpha="0" android:importantForAccessibility="no" />
 <TextView android:id="@+id/navigationHint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|center_horizontal" android:layout_marginBottom="13dp" android:text="@string/navigation_hint" android:textColor="#99FFFFFF" android:textSize="11sp" android:fontFamily="@string/font_regular" android:letterSpacing="0.02" android:importantForAccessibility="no" android:focusable="false" android:visibility="gone" /></FrameLayout>
