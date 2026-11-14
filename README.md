@@ -42,6 +42,8 @@ The theme in `theme/config.json` controls dock order, visible apps, and focus se
 
 To go back to the stock Google TV Home screen, see [Return to the stock Home screen](#return-to-the-stock-home-screen).
 
+Install the optional patched YouTube TV app for ad-free playback from the YouTube dock tile. Playback without ads was confirmed on a Sony BRAVIA VU3 with the 7.30.301 ARMv7 patch. Results may vary as YouTube changes its ad delivery. See [build, installation, and dock setup](tools/youtube-noads/README.md).
+
 ## Return to the stock Home screen
 
 These steps come from reading `install.py`, `restore-google-tv.sh`, `restore-previous.py` and `restore-unwanted.py`. They have not been verified on a TV; the steps marked **needs a TV** are the ones to confirm and report.
